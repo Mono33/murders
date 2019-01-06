@@ -1,0 +1,251 @@
+---
+title: "Recommendation systems:TMDB 5000 Movie Dataset"
+author: "Team38"
+date: "January 6th,2019"
+output:
+  html_document:
+    theme: cerulean
+    highlight: pygments
+    bibliography: bibliography.bib
+    csl: biomed-central.csl
+    code_folding: show
+    toc: yes
+
+---
+
+<br>
+
+<style type="text/css">
+
+h1.title {
+  font-size: 35px;
+
+}
+
+</style>
+
+
+<style>
+p.comment {
+background-color: #DBDBDB;
+padding: 10px;
+border: 1px solid black;
+margin-left: 1px;
+border-radius: 5px;
+font-style: italic;
+}
+
+</style>
+
+
+### *Abstract*
+<p class="comment">
+ write the abstract text here....
+</p>
+
+
+<br>
+<br>
+
+
+```{r}
+on_kaggle <- 1
+
+if (on_kaggle == 0){
+  path <- getwd() #load local copy of dataset
+    } else {
+  path <- "" #access dataset on Kaggle
+    }
+```
+
+
+### I. Introduction
+
+
+Recommender systems are one of the most successful and widespread application of machine learning   technologies in business.There are a subsclass of information filtering system that seek to predict
+the "rating" or "preference" a user would give to an item. One of the most famous success story of 
+the recommender system is the Netflix competition launched on october 2006. In 2009, at the end of
+the challenge , Netflix awarded a one million dollar prize to a [developer team](https://bits.blogs.nytimes.com/2009/09/21/netflix-awards-1-million-prize-and-starts-a-new-contest/) for an algorithm that increased the accuracy of the company's recommendation engine by 10%. Many well-known recommendation algorithms, such as latent factor models, were popularized by the Netflix contest.The Netflix prize contest is become notable for its numerous contributions to the data science community.
+
+According to Aggarwal(2016),the recommendation problem may be formulated in various ways, among which the two main are as follows: The first approach , the "prediction version of problem" aims to predict the rating value for a  user-item combination. It is also referred to as "matrix completion problem". The second approach, the "ranking version of problem" seeks to recommend the top-k items for a particular user, or determine the top-k users to target for a particular item. In the second case, the absolute values of the predicted ratings are not important. The first formulation is more general, because the solutions to the second case can be derived by solving the first formulation for various user-item combinations and then ranking the predictions.
+
+For the ML project, we use the [TMDB 5000 Movie Dataset](https://www.kaggle.com/tmdb/tmdb-movie-metadata/data) available on the Kaggle platform. This dataset was generated from the [The Movie Database API](https://www.themoviedb.org/documentation/api).
+The principal question which arises from the description of the challenge is to predict which films will be highly rated, whether or not they are a commercial success. This means that is mainly a "ranking version of problem" since it does not expect a submission file with predicted ratings for each film, but a list of the top-k recommended films. This approach will be studied and the possible features processed and analyzed with several Machine Learning techniques, focusing on content-based, collaborative filtering, and hybrid recommender systems as described in Adomavicius et al(2010) and Zanker et al() .
+
+
+ To achieve the goal of our analysis , we followed the different steps :
+
+* [II. Dataset and executive summary][II. Dataset and executive summary] 
+* [III. preprocessing][III. preprocessing] 
+* [IV. Methods and modelling approaches][IV. Methods and modelling approaches]
+* [V. Results][V. Results]
+
+
+
+<br>
+
+### II. Dataset and executive summary 
+
+<br>
+
+
+#####  <span style="color:red">1.Dataset overlook</span>. {.tabset .tabset-fade .tabset-pills} 
+<br>
+
+
+`Loading library and data`
+
+```{r, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(scales)
+library(jsonlite)
+library(knitr)
+library(kableExtra)
+library(ggrepel)
+library(gridExtra)
+library(lubridate)
+library(tidytext)
+library(plyr)
+library(formattable)
+library(splitstackshape) 
+library(jsonlite) #JSON format
+library(wordcloud) 
+library(RColorBrewer) 
+library(ggthemes) 
+library(tm) 
+library(RSentiment)
+library(zoo)
+library(stringr)
+library(ggplot2)
+library(readr)
+```
+
+```{r, warning=FALSE, message = FALSE}
+films <- read_csv(str_c(path, "tmdb_5000_movies.csv"), na="NA")
+credits <- read_csv(str_c(path, "tmdb_5000_credits.csv"),  na="NA")
+
+```
+<br>
+
+
+`Summary`
+
+
+###### Movie dataset
+
+```{r}
+class(films)
+glimpse(films)
+summary(films)
+```
+
+###### credit dataset
+
+```{r}
+class(credits)
+glimpse(credits)
+summary(credits)
+
+```
+
+#####
+
+After loading the two provided files "tmdb_5000_movies.csv" and "tmdb_5000_credits.csv" , we can see that the movie dataset is made of 20 features for a total of about 4,803 observations while the credit dataset contains the same number of occurences, but with a total of 4 attributes. Accross the attributes of the two datasets, the key feature and the common identifier is the movie_id. The credit dataset shows other two attributes, "cast" and "crew", that are not present in the movie dataset. Here are some attributes and their characteristics :
+
+-***movie_Id(credit dataset) or id(movie dataset)***: numeric, Unique ID for the movie.
+
+-***budjet***: numeric, financial investment for the production of a movie Id.
+
+-***etc*** 
+
+
+As explained in the Kaggle Overview of the competition, some of the columns are in the [JSON format](https://en.wikipedia.org/wiki/JSON).Looking at the output of glimpse function, we can recognize them starting with curly brackets "{"  : genres, keywords, production_companies, production_countries, and spoken_languages. 
+
+
+
+
+<br>
+
+`Data Wrangling`
+
+To extract informations included in the JSON format attributes, we apply the following code :
+
+```{r}
+#Loading.....
+
+```
+
+comment of the results.... etc..
+
+
+<br>
+<br>
+
+
+
+
+
+
+##### <span style="color:red">2.Preliminary descriptive statistics</span>
+
+<br>
+
+
+`numeric variables: id, budget, revenue, popularity, runtime, vote_average, vote_count`
+
+Loading....
+
+
+
+`nominal variables: genres, title, ecc ...`
+
+Loading....
+
+
+
+
+
+
+
+
+
+
+
+###III. preprocessing
+
+
+
+Loading....
+
+
+
+
+###IV. Methods and modelling approaches
+
+Loading....
+
+
+
+###V. Results
+
+
+Loading...
+
+
+###VI. Conclusion
+
+
+
+Loading...
+
+
+### References
+
+
+Loading...
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
