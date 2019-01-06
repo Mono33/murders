@@ -4,13 +4,15 @@ author: "Team38"
 date: "January 6th,2019"
 output:
   html_document:
-    theme: cerulean
-    highlight: pygments
-    bibliography: bibliography.bib
-    csl: biomed-central.csl
-    code_folding: show
+    df_print: paged
     toc: yes
-
+  github_document:
+    bibliography: bibliography.bib
+    code_folding: show
+    csl: biomed-central.csl
+    highlight: pygments
+    theme: cerulean
+    toc: yes
 ---
 
 <br>
